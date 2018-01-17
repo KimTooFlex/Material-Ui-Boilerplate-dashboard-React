@@ -18,7 +18,12 @@ export function subscribe(name, _object) {
 
 
 export function setState(name, newState) {
-    newState.type = name;
+
+
+    if (typeof(newState.type) === 'undefined') {
+        newState.type = name;
+    }
+
     stores[name]["state"] = newState;
     stores[name].dispatch(newState);
 };
