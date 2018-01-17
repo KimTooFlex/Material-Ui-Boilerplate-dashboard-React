@@ -8,8 +8,7 @@ class Wizard extends Component {
     state ={
        step: "TYPE",
         activeSteps:  {
-            activeStep: 1,
-            skipped: new Set(),
+            activeStep: 2
         }
     }
 
@@ -36,13 +35,7 @@ componentWillMount()
         }
     }
 
-    isStepOptional = step => {
-        return step === 1;
-    };
 
-    isStepSkipped(step) {
-        return this.state.activeSteps.skipped.has(step);
-    }
 
 
 render() {
@@ -83,16 +76,15 @@ render() {
                         <div className={"col"}>
                             <Stepper activeStep={this.state.activeSteps}>
                                 {this.getSteps().map((label, index) => {
-                                    const props = {};
-                                    const labelProps = {};
 
-                                    if (this.isStepSkipped(index)) {
-                                        props.completed = false;
+                                    let completed =true;
+                                    if (index>this.state.activeSteps.activeStep-1) {
+                                       completed  = false;
                                     }
 
                                     return (
-                                        <Step key={label} {...props}>
-                                            <StepLabel {...labelProps}>{label}</StepLabel>
+                                        <Step key={label}  color={"accent"} completed = {completed} >
+                                            <StepLabel>{label}</StepLabel>
                                         </Step>
                                     );
                                 })}
