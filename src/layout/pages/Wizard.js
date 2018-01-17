@@ -29,21 +29,10 @@ class Wizard extends Component {
     }
 
     getSteps() {
-        return ['Alert Type', 'Compose Message', 'Choose Tags & User Groups'];
+        return ['Alert Type', 'Compose Message','Choose Target Location', 'Choose Tags & User Groups','Complete'];
     }
 
-    getStepContent(step) {
-        switch (step) {
-            case 0:
-                return 'Choose Alert Type...';
-            case 1:
-                return 'The SMS you want to broadcast...';
-            case 2:
-                return 'Choose user groups/Tags';
-            default:
-                return 'Unknown step';
-        }
-    }
+
 
     render() {
 
@@ -54,11 +43,16 @@ class Wizard extends Component {
         }
 
         if (this.state.activeSteps.activeStep === 2) {
-            page = (<Tags/>);
+            page = (<Location />);
         }
 
         if (this.state.activeSteps.activeStep === 3) {
+            page = (<Tags/>);
+        }
 
+
+        if (this.state.activeSteps.activeStep === 4) {
+            page= (<Complete />);
         }
 
 
@@ -115,6 +109,173 @@ class Wizard extends Component {
 }
 
 
+class Location extends React.Component {
+    state = {
+        countries: ["Kenya","Uganda","Tanzania"],
+        country: "",
+
+    };
+
+    componentWillMount() {
+        subscribe("Location", this);
+    }
+
+    handleCountryChange = name=>event => {
+        let _state= this.state;
+        _state.country = event.target.value;
+        setState("Location",_state);
+    };
+
+    componentDidMount() {
+
+    }
+    handleNext = name => event => {
+        if (true) {
+            setState("Wizard",
+                {
+                    activeSteps: {
+                        activeStep: 3
+                    }
+                })
+        } else {
+            swal("Oops!", "Empty sms", "error");
+        }
+    };
+    handlePrev = name => event => {
+        setState("Wizard",
+            {
+                activeSteps: {
+                    activeStep:1
+                }
+            })
+
+    };
+
+    render() {
+        return (
+          <div className={"col-12"} style={{textAlign: "center", width: '100%'}}>
+
+              <br/>
+              <br/>
+              <br/>
+              <div className={"row"}>
+                 <div className={"col-3"} style={{textAlign: "center"}}>
+                <label>COUNTRY</label> <br/>
+                <Select
+                    value={this.state.country}
+                    onChange={this.handleCountryChange()}
+                    input={<Input name="type" id="type"/>}
+                >
+
+                    <MenuItem value={1}>Kenya</MenuItem>
+                    <MenuItem value={2}>Uganda</MenuItem>
+                    <MenuItem value={3}>Tanzania</MenuItem>
+
+                </Select>
+            </div>
+              <div className={"col-3"} style={{textAlign: "left"}}>
+                  <label>COUNTY</label> <br/>
+                  <Select
+                      value={this.state.country}
+                      onChange={this.handleCountryChange()}
+                      input={<Input name="type" id="type"/>}
+                  >
+
+                      <MenuItem value={1}>Kenya</MenuItem>
+                      <MenuItem value={2}>Uganda</MenuItem>
+                      <MenuItem value={3}>Tanzania</MenuItem>
+
+                  </Select>
+              </div>
+                  <div className={"col-3"} style={{textAlign: "left"}}>
+                      <label>SUB-COUNTY</label> <br/>
+                      <Select
+                          value={this.state.country}
+                          onChange={this.handleCountryChange()}
+                          input={<Input name="type" id="type"/>}
+                      >
+
+                          <MenuItem value={1}>Kenya</MenuItem>
+                          <MenuItem value={2}>Uganda</MenuItem>
+                          <MenuItem value={3}>Tanzania</MenuItem>
+
+                      </Select>
+                  </div>
+                  <div className={"col-3"} style={{textAlign: "left"}}>
+                      <label>WARD</label> <br/>
+                      <Select
+                          value={this.state.country}
+                          onChange={this.handleCountryChange()}
+                          input={<Input name="type" id="type"/>}
+                      >
+
+                          <MenuItem value={1}>Kenya</MenuItem>
+                          <MenuItem value={2}>Uganda</MenuItem>
+                          <MenuItem value={3}>Tanzania</MenuItem>
+
+                      </Select>
+                  </div>
+                  </div>
+
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <div className={"col"}>
+                <Button raised color="accent" onClick={this.handlePrev()}>
+                    Prev
+                </Button>
+                &nbsp;
+                <Button raised color="accent" onClick={this.handleNext()}>
+                    Next
+                </Button>
+            </div>
+        </div>)
+    }
+
+}
+
+
+class Complete extends React.Component {
+    state = {};
+
+    componentWillMount() {
+        subscribe("Complete", this);
+    }
+
+
+    componentDidMount() {
+
+    }
+
+    handleReset = name => event => {
+        setState("Wizard",
+            {
+                activeSteps: {
+                    activeStep: 0
+                }
+            })
+    };
+
+    render() {
+        return (
+            <div className={"col"} style={{width: '100%',textAlign: "center"}}>
+                <div className="alert alert-success" role="alert">
+                    <strong>Successfull</strong> You successfully sent the Broadcast.
+                    <br/>
+                    <br/>
+                    <Button raised color="accent" onClick={this.handleReset()}>
+                        SEND ANOTHER
+                    </Button>
+                </div>
+
+            </div>
+
+
+        )
+    }
+
+}
 
 class MessageType extends React.Component {
     state = {
@@ -245,7 +406,7 @@ class Tags extends React.Component {
             setState("Wizard",
                 {
                     activeSteps: {
-                        activeStep: 3
+                        activeStep: 4
                     }
                 })
         } else {
@@ -257,7 +418,7 @@ class Tags extends React.Component {
         setState("Wizard",
             {
                 activeSteps: {
-                    activeStep: 1
+                    activeStep: 2
                 }
             })
 
