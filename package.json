@@ -15,7 +15,8 @@
     "sweetalert": "^2.1.0",
     "sweetalert2": "^7.4.0",
     "typeface-roboto": "0.0.50",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "validator": "^9.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

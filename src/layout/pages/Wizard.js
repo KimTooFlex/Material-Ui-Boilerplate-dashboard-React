@@ -9,6 +9,7 @@ import TextField from 'material-ui/TextField';
 import swal from 'sweetalert2';
 import {ListItemText} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
+import LocationChooser from "./LocationChooser";
 
 class Wizard extends Component {
     state = {
@@ -43,7 +44,7 @@ class Wizard extends Component {
         }
 
         if (this.state.activeSteps.activeStep === 2) {
-            page = (<Location />);
+            page = (<LocationChooser />);
         }
 
         if (this.state.activeSteps.activeStep === 3) {
@@ -109,131 +110,6 @@ class Wizard extends Component {
 }
 
 
-class Location extends React.Component {
-    state = {
-        countries: ["Kenya","Uganda","Tanzania"],
-        country: "",
-
-    };
-
-    componentWillMount() {
-        subscribe("Location", this);
-    }
-
-    handleCountryChange = name=>event => {
-        let _state= this.state;
-        _state.country = event.target.value;
-        setState("Location",_state);
-    };
-
-    componentDidMount() {
-
-    }
-    handleNext = name => event => {
-        if (true) {
-            setState("Wizard",
-                {
-                    activeSteps: {
-                        activeStep: 3
-                    }
-                })
-        } else {
-            swal("Oops!", "Empty sms", "error");
-        }
-    };
-    handlePrev = name => event => {
-        setState("Wizard",
-            {
-                activeSteps: {
-                    activeStep:1
-                }
-            })
-
-    };
-
-    render() {
-        return (
-          <div className={"col-12"} style={{textAlign: "center", width: '100%'}}>
-
-              <br/>
-              <br/>
-              <br/>
-              <div className={"row"}>
-                 <div className={"col-3"} style={{textAlign: " "}}>
-                <label>COUNTRY</label> <br/>
-                <Select
-                    value={this.state.country}
-                    onChange={this.handleCountryChange()}
-                    input={<Input name="type" id="type"/>}
-                >
-
-                    <MenuItem value={1}>Kenya</MenuItem>
-                    <MenuItem value={2}>Uganda</MenuItem>
-                    <MenuItem value={3}>Tanzania</MenuItem>
-
-                </Select>
-            </div>
-              <div className={"col-3"} style={{textAlign: "left"}}>
-                  <label>COUNTY</label> <br/>
-                  <Select
-                      value={this.state.country}
-                      onChange={this.handleCountryChange()}
-                      input={<Input name="type" id="type"/>}
-                  >
-
-                      <MenuItem value={1}>Kenya</MenuItem>
-                      <MenuItem value={2}>Uganda</MenuItem>
-                      <MenuItem value={3}>Tanzania</MenuItem>
-
-                  </Select>
-              </div>
-                  <div className={"col-3"} style={{textAlign: "left"}}>
-                      <label>SUB-COUNTY</label> <br/>
-                      <Select
-                          value={this.state.country}
-                          onChange={this.handleCountryChange()}
-                          input={<Input name="type" id="type"/>}
-                      >
-
-                          <MenuItem value={1}>Kenya</MenuItem>
-                          <MenuItem value={2}>Uganda</MenuItem>
-                          <MenuItem value={3}>Tanzania</MenuItem>
-
-                      </Select>
-                  </div>
-                  <div className={"col-3"} style={{textAlign: "left"}}>
-                      <label>WARD</label> <br/>
-                      <Select
-                          value={this.state.country}
-                          onChange={this.handleCountryChange()}
-                          input={<Input name="type" id="type"/>}
-                      >
-
-                          <MenuItem value={1}>Kenya</MenuItem>
-                          <MenuItem value={2}>Uganda</MenuItem>
-                          <MenuItem value={3}>Tanzania</MenuItem>
-
-                      </Select>
-                  </div>
-                  </div>
-
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <div className={"col"}>
-                <Button raised color="accent" onClick={this.handlePrev()}>
-                    Prev
-                </Button>
-                &nbsp;
-                <Button raised color="accent" onClick={this.handleNext()}>
-                    Next
-                </Button>
-            </div>
-        </div>)
-    }
-
-}
 
 
 class Complete extends React.Component {

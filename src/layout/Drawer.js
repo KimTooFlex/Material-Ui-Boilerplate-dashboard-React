@@ -71,6 +71,12 @@ class myDrawer extends Component {
                             </ListItemIcon>
                             <ListItemText primary="User Groups" />
                         </ListItem>
+                        <ListItem button onClick={this.handleChange("Locations")}>
+                            <ListItemIcon>
+                                <i className="fas fa-map-marker"></i>
+                            </ListItemIcon>
+                            <ListItemText primary="Locations" />
+                        </ListItem>
                         <ListItem button onClick={this.handleChange("Contacts")}>
                             <ListItemIcon>
                                 <i className="fas fa-phone"></i>
@@ -89,12 +95,12 @@ class myDrawer extends Component {
                             </ListItemIcon>
                             <ListItemText primary="Inbox" />
                         </ListItem>
-                        <ListItem button onClick={this.handleChange("Settings")}>
-                            <ListItemIcon>
-                                <i className="fas fa-cog"></i>
-                            </ListItemIcon>
-                            <ListItemText primary="Settings" />
-                        </ListItem>
+                        {/*<ListItem button onClick={this.handleChange("Settings")}>*/}
+                            {/*<ListItemIcon>*/}
+                                {/*<i className="fas fa-cog"></i>*/}
+                            {/*</ListItemIcon>*/}
+                            {/*<ListItemText primary="Settings" />*/}
+                        {/*</ListItem>*/}
                     </List>
                     <Divider />
                     <List>

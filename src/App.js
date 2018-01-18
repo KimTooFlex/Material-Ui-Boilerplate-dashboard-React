@@ -27,13 +27,10 @@ class App extends Component {
                     main: green[600],
                     dark:green[700],
                     contrastText: defaultTheme.palette.getContrastText(green[700]),
-                },
-                error: red.A400,
+                }
             },
         });
 
-        put("name","kimtoo");
-        alert(JSON.stringify(get("name")));
 
         return (
 

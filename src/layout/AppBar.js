@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import Button from 'material-ui/Button';
+import { LinearProgress } from 'material-ui/Progress';
 
 import {subscribe,setState,getState} from "../lib/Redux";
 
@@ -12,7 +13,7 @@ class MyAppBar extends Component {
 
     state ={
         title: "AppBar",
-        page: "User Groups",
+        page: "Login",
         loggedIn: false
     }
 
@@ -38,6 +39,8 @@ class MyAppBar extends Component {
 
     render() {
 
+        let display = this.props.display;
+
         return (
             <div className={{width: '100%'}}>
                 <AppBar position="static">
@@ -45,7 +48,7 @@ class MyAppBar extends Component {
                         <IconButton className={ {
                             marginLeft: -12,
                             marginRight: 20,
-                        }}  onClick={this.toggleDrawer} color="contrast" aria-label="Menu">
+                        }}  onClick={this.toggleDrawer} style={{display: display}} color="contrast" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
                         <Typography className={{
@@ -53,15 +56,36 @@ class MyAppBar extends Component {
                         }} type="title" color="inherit"  >
                             {this.state.title +"  - "+ this.state.page}
                         </Typography>
-                        <div className={"col"} style={{textAlign:"right"}}>  <Button  onClick = {this.onNewMessage()}  color="contrast">NEW MESSAGE</Button></div>
+                        <div  className={"col"} style={{textAlign:"right",display: display}}>   <Button  onClick = {this.onNewMessage()}  color="contrast">NEW MESSAGE</Button></div>
                     </Toolbar>
-
+<Loader />
                 </AppBar>
+
             </div>
         );
     }
 }
 
+
+class Loader extends React.Component {
+    state = {
+        visible: false
+    };
+
+    componentWillMount() {
+        subscribe("Loader", this);
+    }
+
+
+    render() {
+        const  display = {
+            true: '',
+            false: 'none'
+        }
+        return ( <LinearProgress style={{display: display[this.state.visible]}} />)
+    }
+
+}
 
 
 export default MyAppBar;

@@ -9,18 +9,29 @@ const reducer = (state, action) => {
 let stores = {};
 
 export function subscribe(name, _object) {
-    stores[name] = createStore(reducer, {});
-    stores[name]["state"] = _object.state;
-    stores[name].subscribe(() => {
-        _object.setState(stores[name].getState());
-    });
+
+    let state = _object.state;
+    if (stores[name]) {
+        state= stores[name]["state"];
+        _object.setState(state)
+     }
+
+        stores[name] = createStore(reducer, {});
+        stores[name]["state"] = state;
+        stores[name].subscribe(() => {
+            _object.setState(stores[name].getState());
+        });
+
+
+
+
+
+
 };
 
 
 export function setState(name, newState) {
-
-
-    if (typeof(newState.type) === 'undefined') {
+  if (typeof(newState.type) === 'undefined') {
         newState.type = name;
     }
 
