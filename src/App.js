@@ -5,7 +5,7 @@ import pink from 'material-ui/colors/pink';
 import green from 'material-ui/colors/lightGreen';
 import blueGray from 'material-ui/colors/blueGrey';
 import { createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
-
+import {put,get} from "./lib/Moing";
 
 class App extends Component {
 
@@ -32,7 +32,13 @@ class App extends Component {
             },
         });
 
+        put("name","kimtoo");
+        alert(JSON.stringify(get("name")));
+
         return (
+
+
+
             <MuiThemeProvider theme={theme}>
                 <Layout />
             </MuiThemeProvider>

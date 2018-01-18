@@ -159,7 +159,7 @@ class Location extends React.Component {
               <br/>
               <br/>
               <div className={"row"}>
-                 <div className={"col-3"} style={{textAlign: "center"}}>
+                 <div className={"col-3"} style={{textAlign: " "}}>
                 <label>COUNTRY</label> <br/>
                 <Select
                     value={this.state.country}

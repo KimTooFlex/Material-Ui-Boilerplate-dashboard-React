@@ -1,7 +1,7 @@
-import Encryption from './Encryption';
+import{encode} from './Encryption';
 let salt='1234'
 
- exports.put = function(key,value) {
+ export function put(key,value) {
 
   let str = '';
   try {
@@ -10,15 +10,19 @@ let salt='1234'
   } catch (e) {
     str=value;
   }
-  localStorage.setItem(Encryption.encode(key,salt),Encryption.encode(str,salt));
+  localStorage.setItem( encode(key,salt), encode(str,salt));
  }
 
-  exports.get = function(key) {
-     let str= Encryption.encode(localStorage.getItem(Encryption.encode(key,salt)),salt);
+  export function  get(key) {
+     let str=  encode(localStorage.getItem( encode(key,salt)),salt);
      try {
        let obj = JSON.parse(str);
        return obj;
      } catch (e) {
           return str;
      }
+  }
+
+  export default function init() {
+
   }

@@ -4,7 +4,7 @@
  //////////////////////////////////
 
 
-exports.setEnv =  function (domain, dev,prod) {
+export default function setEnv(domain, dev,prod) {
 	 let url =window.location.toString();
 	 let str=domain.toString().toLowerCase();
 	 let isDev=false;

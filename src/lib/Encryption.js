@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-exports.encode =  function (s, k) {
+export  function encode(s, k) {
    if(s===null) {
 		  return null;
 	 }
@@ -16,3 +16,7 @@ exports.encode =  function (s, k) {
 		}
 		return enc;
 	}
+
+export default function init() {
+	//do nothing
+}
